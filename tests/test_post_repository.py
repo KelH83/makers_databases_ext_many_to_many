@@ -17,3 +17,10 @@ def test_get_all_records(db_connection):
         Post(6,'A foodie week in Spain'),
         Post(7,'SQL basics')
     ]
+
+def test_find_by_post(db_connection):
+    db_connection.seed("seeds/blog_posts_tags.sql")
+    repository = PostRepository(db_connection)
+
+    tags = repository.find_by_post(2)
+    assert tags == Post(2,"Python classes",["coding","education"])
